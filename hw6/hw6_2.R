@@ -32,6 +32,7 @@ x <- cbind(ones, dfy, infl, svar, tms,
 
 
 # Part 1
+#
 model <- lm(y ~ (x- 1 ))
 
 # Part a: Individual Wald tests for each coefficient
