@@ -171,34 +171,65 @@ print(best_Cp_model)
 cat("\nBest model according to LOO-CV:\n")
 print(best_LOO_CV_model)
 
-
-# Plotting model selection statistics
-# Function to plot statistics
-plot_statistic <- function(statistic, y_label) {
-  ggplot(results, aes(x = num_predictors, y = statistic)) +
+plot_statistic_flat <- function(statistic, y_label) {
+  ggplot(results, aes(x = model_number, y = statistic)) +
     geom_point(alpha = 0.5) +
-    labs(title = paste(y_label, "vs Number of Predictors"), x = "Number of Predictors", y = y_label) +
+    labs(title = paste(y_label, "vs Model Number"), x = "Model Number", y = y_label) +
     theme_minimal()
 }
 
 # Plot centered R^2
-plot_statistic(results$R_squared, "Centered R^2")
+plot_statistic_flat(results$R_squared, "Centered R^2")
 
 # Plot adjusted R^2
-plot_statistic(results$adjusted_R_squared, "Adjusted R^2")
+plot_statistic_flat(results$adjusted_R_squared, "Adjusted R^2")
 
 # Plot AIC
-plot_statistic(results$AIC, "AIC")
+plot_statistic_flat(results$AIC, "AIC")
 
 # Plot BIC
-plot_statistic(results$BIC, "BIC")
+plot_statistic_flat(results$BIC, "BIC")
 
-# Plot Mallows' Cp
-ggplot(results, aes(x = num_predictors, y = Mallows_Cp)) +
+# Plot Mallows' Cp with a reference line
+ggplot(results, aes(x = model_number, y = Mallows_Cp)) +
   geom_point(alpha = 0.5) +
   geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
-  labs(title = "Mallows' Cp vs Number of Predictors", x = "Number of Predictors", y = "Mallows' Cp") +
+  labs(title = "Mallows' Cp vs Model Number", x = "Model Number", y = "Mallows' Cp") +
   theme_minimal()
 
-plot_statistic(results$LOO_CV, "LOO-CV Error")
+# Plot LOO-CV Error
+plot_statistic_flat(results$LOO_CV, "LOO-CV Error")
+
+
+
+
+# # Plotting model selection statistics
+# # Function to plot statistics
+# plot_statistic <- function(statistic, y_label) {
+#   ggplot(results, aes(x = num_predictors, y = statistic)) +
+#     geom_point(alpha = 0.5) +
+#     labs(title = paste(y_label, "vs Number of Predictors"), x = "Number of Predictors", y = y_label) +
+#     theme_minimal()
+# }
+
+# # Plot centered R^2
+# plot_statistic(results$R_squared, "Centered R^2")
+
+# # Plot adjusted R^2
+# plot_statistic(results$adjusted_R_squared, "Adjusted R^2")
+
+# # Plot AIC
+# plot_statistic(results$AIC, "AIC")
+
+# # Plot BIC
+# plot_statistic(results$BIC, "BIC")
+
+# # Plot Mallows' Cp
+# ggplot(results, aes(x = num_predictors, y = Mallows_Cp)) +
+#   geom_point(alpha = 0.5) +
+#   geom_abline(slope = 1, intercept = 0, color = "red", linetype = "dashed") +
+#   labs(title = "Mallows' Cp vs Number of Predictors", x = "Number of Predictors", y = "Mallows' Cp") +
+#   theme_minimal()
+
+# plot_statistic(results$LOO_CV, "LOO-CV Error")
 

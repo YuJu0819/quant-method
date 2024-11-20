@@ -76,8 +76,8 @@ recover_rates_grouped <- recover_rates %>%
   summarise(MeanRecoverRate = mean(RecoverRate, na.rm = TRUE), .groups = "drop")
 
 death_rates_grouped_filtered <- death_rates_grouped %>%
-  filter(Date <= as.Date("2021-08-05"))
-recover_rates_grouped <- recover_rates_grouped %>% filter(Date <= as.Date(("2021-08-05")))
+  filter(Date < as.Date("2021-08-05"))
+recover_rates_grouped <- recover_rates_grouped %>% filter(Date <as.Date(("2021-08-05")))
 
 # Plot comparison
 ggplot(death_rates_grouped, aes(x = Date, y = MeanDeathRate, color = Group)) +
